@@ -1,0 +1,53 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ahorcado</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}" />
+</head>
+
+<body th:attr="onload=|prueba('${resultado}');|">
+
+
+
+<div class="panelControl" th:replace="fragments/panelControl :: header"></div>
+
+<div class="titulo">
+<!--    <img width="100px" height="100px" th:styleappend=" 'background: url(/img/images.jpg) 0 0;'">-->
+    <img th:id="${intentos.get(numIntentos)}" th:src="@{/img/FFFFFF-0.0.jpg}">
+
+</div>
+
+<h1 class="titulo"  th:text="${resultado}"></h1>
+
+<form id="ahorcado" class="formulario" th:action="@{/partida}" method="post">
+
+    Nombre del cliente: <b><span class="info" th:text="${_id}"></span></b>
+    <fieldset  th:width="40" class="titulo">
+
+        <legend class="texto">Palabra: </legend>
+
+        <th:block th:each="letra: ${palabra}">
+
+            <span class="texto" th:text="${letra}"></span>
+
+        </th:block>
+
+        <br>
+        <br>
+        <input name="letra" class="cuadrado" type="text" th:value="${letra}"/>
+
+        <br>
+        <br>
+
+        <span class="texto">Nº de intentos: </span>
+        <span class="texto" name="intentos" th:text="${numIntentos}">
+        </span>
+
+        <br>
+        <br>
+        <input type="submit" value="Comprobar"/>
+    </fieldset>
+
+</form>
+</body>
+</html>
